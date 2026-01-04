@@ -169,6 +169,27 @@ export interface VideoFrame {
     timestamp: number;
 }
 
+export interface TranscriptionData {
+    text: string;
+    isFinal: boolean;
+    timestamp: number;
+    confidence?: number;
+}
+
+export interface StreamingLog {
+    date: Date;
+    type: string;
+    message: unknown;
+    count?: number;
+}
+
+export interface ClientContentLog {
+    date: Date;
+    type: string;
+    message: unknown;
+    count?: number;
+}
+
 // ============================================================================
 // GEMINI LIVE API TYPES
 // ============================================================================

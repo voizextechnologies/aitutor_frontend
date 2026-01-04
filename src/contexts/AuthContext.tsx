@@ -10,8 +10,8 @@ interface AuthUser {
   user_id: string;
   email: string;
   name: string;
-  age: number;
-  current_grade: string;
+  age?: number;
+  current_grade?: string;
   user_type: string;
   learning_style?: string;
 }

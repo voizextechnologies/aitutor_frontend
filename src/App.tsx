@@ -68,10 +68,7 @@ function App() {
   const mediaMixer = useMediaMixer({
     width: 1280,
     height: 2160,
-    fps: 2,  // Reduced from 10 to 2 FPS for better performance
-    quality: 0.85,
-    cameraEnabled: cameraEnabled,
-    screenEnabled: screenEnabled,
+    fps: 2,
     cameraVideoRef: cameraVideoRef,
     screenVideoRef: screenVideoRef
   });
@@ -137,7 +134,8 @@ function App() {
                       <div className="question-panel">
                         <BackgroundShapes />
                         <ScratchpadCapture onFrameCaptured={(canvas) => {
-                          mediaMixer.updateScratchpadFrame(canvas);
+                          const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                          mediaMixer.updateScratchpadFrame(dataUrl);
                         }}>
                           <QuestionDisplay onSkillChange={setCurrentSkill} />
                           {isScratchpadOpen && (

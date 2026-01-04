@@ -24,8 +24,10 @@ import "./auth.scss";
 
 // Zod Schema for Validation
 const signupSchema = z.object({
+  name: z.string().min(1, "Name is required"),
   userType: z.enum(["student", "parent"]),
   age: z.coerce.number().min(5, "Age must be at least 5").max(18, "Age must be under 18"),
+  currentGrade: z.string().min(1, "Current grade is required"),
   // Step 2
   subjects: z.array(z.string()).min(1, "Select at least one subject"),
   learningGoals: z.array(z.string()).min(1, "Select at least one goal"),
@@ -121,11 +123,11 @@ const SignupForm: React.FC<SignupFormProps> = ({ setupToken, googleUser, onCompl
     setSubmitError("");
 
     try {
-      const response = await authAPI.completeSetup(setupToken, data.userType, data.age, {
-        subjects: data.subjects,
-        learningGoals: data.learningGoals,
-        interests: data.interests,
-        learningStyle: data.learningStyle,
+      const response = await authAPI.completeSetup(setupToken, {
+        name: data.name || '',
+        age: data.age,
+        current_grade: data.currentGrade || '',
+        learning_style: data.learningStyle,
       });
       onComplete(response.token, response.user);
     } catch (err: any) {
